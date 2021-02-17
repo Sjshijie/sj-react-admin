@@ -1,15 +1,16 @@
-import { takeEvery,put }  from 'redux-saga/effects'
+import { takeEvery,put, all, take,call }  from 'redux-saga/effects'
 
-function* test(){
-    console.log(222)
-    put({type:'test'})
-}
+
+import userSaga from './saga/userSaga';
+import permissionSaga from './saga/permissionSaga';
+
 
 
 function* rootSaga(){
-    // yield homeSaga()  //执行子模块saga 必须要加 yield
-
-    yield takeEvery("testAction",test)
+    yield all([
+        call(userSaga),
+        call(permissionSaga)
+    ])
 }
 
 export default rootSaga;

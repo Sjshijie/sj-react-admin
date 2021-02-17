@@ -42,6 +42,12 @@ service.interceptors.request.use(
 	}
 )
 
+interface ResponseResult<T = any> {
+    code: number;
+    msg: string;
+    data: T;
+  }
+
 // response interceptor
 service.interceptors.response.use(
 	/**
@@ -55,6 +61,7 @@ service.interceptors.response.use(
 	 * You can also judge the status by HTTP Status Code
 	 */
 	(response) => {
+		
 		const res = response.data
 		/* 获取服务器响应头文件名,单独处理 */
 		if(response.headers['content-disposition']){

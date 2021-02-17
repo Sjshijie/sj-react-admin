@@ -1,34 +1,11 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';//支持在action里路由跳转
+import { History } from 'history';//支持在action里路由跳转
+import userReducer from './reducer/userReducer'
+import permissionReducer from './reducer/permissionReducer';
 
-const defaultState = {
-    indexState: {}
-};
-
-let indexReducer = (state = defaultState, action:string) => {
-    console.log(action)
-    // switch(action.type) {
-    //     // case constants.SEARCH_FOCUS:
-    //     //     return state.set('focused', true);
-    //     // case constants.SEARCH_BLUR:
-    //     //     return state.set('focused', false);
-    //     // case constants.CHANGE_LIST:
-    //     //     return state.merge({
-    //     //         list: action.data,
-    //     //         totalPage: action.totalPage
-    //     //     });
-    //     // case constants.MOUSE_ENTER:
-    //     //     return state.set('mouseIn', true);
-    //     // case constants.MOUSE_LEAVE:
-    //     //     return state.set('mouseIn', false);
-    //     // case constants.CHANGE_PAGE:
-    //     //     return state.set('page', action.page);
-    //     // default:
-    //     //     return state;
-    //     return state;
-    // }
-    return state;
-}
-
-export default combineReducers({
-    indexReducer
+export default (history:History)=>combineReducers({
+    router: connectRouter(history), //支持在action里路由跳转
+    userReducer,
+    permissionReducer
 })
